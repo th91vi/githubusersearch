@@ -25,24 +25,59 @@ class Ui {
                     </div>
                 </div>
             </div>
-            <h3 class="page-heading mb-3">Últimos repositórios</h3>
+            <h3 class="page-heading mb-3">Últimos 5 repositórios</h3>
             <div id="repos"></div>
         `;
     }
 
-    showAlert(message, className){
-        // cria div com alerta
-        const div = document.createElement('div');
-        // adiciona clases na div
-        div.className = className;
-        // adiciona texto na div
-        div.appendChild(document.createTextNode(message));
-        // pega elemento pai
-        const containerAlerta = document.querySelector('.searchContainer');
-        // pega campo de busca
-        const search = document.querySelector('.search');
-        // insere o alerta
-        containerAlerta.insertBefore(div, search);
+    showRepos(repos){
+        let output = '';
+
+        repos.forEach(repo => {
+            output += `
+                <div class="card card-body mb-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="${repo.html_url} target="_blank">${repo.name}</a>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="badge mb-1 badge-primary">Stars: ${repo.stargazers_count}</span>
+                            <span class="badge mb-1 badge-secondary">Watchers: ${repo.watchers_count}</span>
+                            <span class="badge mb-1 badge-success">Forks: ${repo.forks_count}</span>
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+
+        // exibe reposit[orios no HTML
+        document.getElementById('repos').innerHTML = output;
+    }
+
+    // showAlert(message, className){
+    //     // cria div com alerta
+    //     const div = document.createElement('div');
+    //     // adiciona clases na div
+    //     div.className = className;
+    //     // adiciona texto na div
+    //     div.appendChild(document.createTextNode(message));
+    //     // pega elemento pai
+    //     const containerAlerta = document.querySelector('.searchContainer');
+    //     // pega campo de busca
+    //     const search = document.querySelector('.search');
+    //     // insere o alerta
+    //     containerAlerta.insertBefore(div, search);
+    // }
+
+    showAlert(message, className) {
+        this.profile.innerHTML = `<div class="${className}">${message}</div>`;
+        setTimeout(() => {
+          this.clearAlert();
+        }, 2000);
+    } 
+
+    clearAlert() {
+        this.profile.innerHTML = "";
     }
     
     clearProfile(){

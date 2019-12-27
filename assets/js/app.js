@@ -19,10 +19,10 @@ searchUser.addEventListener('keyup', (e) => {
             if (data.profile.message === 'Not Found') {
                 // mostra alerta
                 ui.showAlert('Perfil não encontrado', 'alert alert-danger');
-                console.log('perfil nao encontrado')
             } else {
                 // mostra profile
                 ui.showProfile(data.profile);
+                ui.showRepos(data.repos);
             }
         })
     } else {
