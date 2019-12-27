@@ -1,0 +1,2 @@
+# githubusersearch
+For educational purposes
